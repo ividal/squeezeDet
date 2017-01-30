@@ -2,9 +2,9 @@
 
 """Evaluation"""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import cv2
 from datetime import datetime
@@ -58,13 +58,13 @@ def eval_once(saver, ckpt_path, summary_writer, imdb, model):
 
     num_images = len(imdb.image_idx)
 
-    all_boxes = [[[] for _ in xrange(num_images)]
-                 for _ in xrange(imdb.num_classes)]
+    all_boxes = [[[] for _ in range(num_images)]
+                 for _ in range(imdb.num_classes)]
 
     _t = {'im_detect': Timer(), 'im_read': Timer(), 'misc': Timer()}
 
     num_detection = 0.0
-    for i in xrange(num_images):
+    for i in range(num_images):
       _t['im_read'].tic()
       images, scales = imdb.read_image_batch(shuffle=False)
       _t['im_read'].toc()
@@ -133,7 +133,7 @@ def eval_once(saver, ckpt_path, summary_writer, imdb, model):
     print ('Analyzing detections...')
     stats, ims = imdb.do_detection_analysis_in_eval(
         FLAGS.eval_dir, global_step)
-    for k, v in stats.iteritems():
+    for k, v in stats.items():
       eval_summary_ops.append(
           tf.scalar_summary(
             'Detection Analysis/'+k, v)

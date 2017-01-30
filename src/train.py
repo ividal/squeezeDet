@@ -2,9 +2,9 @@
 
 """Train"""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import cv2
 from datetime import datetime
@@ -163,7 +163,7 @@ def train():
 
     summary_writer = tf.train.SummaryWriter(FLAGS.train_dir, sess.graph)
 
-    for step in xrange(FLAGS.max_steps):
+    for step in range(FLAGS.max_steps):
       start_time = time.time()
 
       # read batch input

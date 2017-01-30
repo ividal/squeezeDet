@@ -18,7 +18,7 @@ class kitti(imdb):
     self._image_path = os.path.join(self._data_root_path, 'training', 'image_2')
     self._label_path = os.path.join(self._data_root_path, 'training', 'label_2')
     self._classes = self.mc.CLASS_NAMES
-    self._class_to_idx = dict(zip(self.classes, xrange(self.num_classes)))
+    self._class_to_idx = dict(list(zip(self.classes, list(range(self.num_classes)))))
 
     # a list of string indices of images in the directory
     self._image_idx = self._load_image_set_idx() 
@@ -117,7 +117,7 @@ class kitti(imdb):
       with open(filename, 'wt') as f:
         for cls_idx, cls in enumerate(self._classes):
           dets = all_boxes[cls_idx][im_idx]
-          for k in xrange(len(dets)):
+          for k in range(len(dets)):
             f.write(
                 '{:s} -1 -1 0.0 {:.2f} {:.2f} {:.2f} {:.2f} 0.0 0.0 0.0 0.0 0.0 '
                 '0.0 0.0 {:.3f}\n'.format(
@@ -131,7 +131,7 @@ class kitti(imdb):
                          self._image_set+'.txt') + ' ' \
           + os.path.dirname(det_file_dir) + ' ' + str(len(self._image_idx))
 
-    print('Running: {}'.format(cmd))
+    print(('Running: {}'.format(cmd)))
     status = subprocess.call(cmd, shell=True)
 
     aps = []
@@ -287,20 +287,20 @@ class kitti(imdb):
     f.close()
 
     print ('Detection Analysis:')
-    print ('    Number of detections: {}'.format(num_dets))
-    print ('    Number of objects: {}'.format(num_objs))
-    print ('    Percentage of correct detections: {}'.format(
-      num_correct/num_dets))
-    print ('    Percentage of localization error: {}'.format(
-      num_loc_error/num_dets))
-    print ('    Percentage of classification error: {}'.format(
-      num_cls_error/num_dets))
-    print ('    Percentage of background error: {}'.format(
-      num_bg_error/num_dets))
-    print ('    Percentage of repeated detections: {}'.format(
-      num_repeated_error/num_dets))
-    print ('    Recall: {}'.format(
-      num_detected_obj/num_objs))
+    print(('    Number of detections: {}'.format(num_dets)))
+    print(('    Number of objects: {}'.format(num_objs)))
+    print(('    Percentage of correct detections: {}'.format(
+      num_correct/num_dets)))
+    print(('    Percentage of localization error: {}'.format(
+      num_loc_error/num_dets)))
+    print(('    Percentage of classification error: {}'.format(
+      num_cls_error/num_dets)))
+    print(('    Percentage of background error: {}'.format(
+      num_bg_error/num_dets)))
+    print(('    Percentage of repeated detections: {}'.format(
+      num_repeated_error/num_dets)))
+    print(('    Recall: {}'.format(
+      num_detected_obj/num_objs)))
 
     out = {}
     out['num of detections'] = num_dets

@@ -239,11 +239,11 @@ class imdb(object):
       aidx_per_batch.append(aidx_per_image)
 
     if mc.DEBUG_MODE:
-      print ('max iou: {}'.format(max_iou))
-      print ('min iou: {}'.format(min_iou))
-      print ('avg iou: {}'.format(avg_ious/num_objects))
-      print ('number of objects: {}'.format(num_objects))
-      print ('number of objects with 0 iou: {}'.format(num_zero_iou_obj))
+      print(('max iou: {}'.format(max_iou)))
+      print(('min iou: {}'.format(min_iou)))
+      print(('avg iou: {}'.format(avg_ious/num_objects)))
+      print(('number of objects: {}'.format(num_objects)))
+      print(('number of objects with 0 iou: {}'.format(num_zero_iou_obj)))
 
     return image_per_batch, label_per_batch, delta_per_batch, \
         aidx_per_batch, bbox_per_batch
@@ -283,7 +283,7 @@ class imdb(object):
     out_ims = []
     # Randomly select some detections and plot them
     COLOR = (200, 200, 0)
-    for error_type, dets in dets_per_type.iteritems():
+    for error_type, dets in dets_per_type.items():
       det_im_dir = os.path.join(output_image_dir, error_type)
       if os.path.exists(det_im_dir):
         shutil.rmtree(det_im_dir)

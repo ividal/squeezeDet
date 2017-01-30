@@ -2,9 +2,9 @@
 
 """Neural network model base class."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import os
 import sys
@@ -13,6 +13,7 @@ from utils import util
 from easydict import EasyDict as edict
 import numpy as np
 import tensorflow as tf
+import collections
 
 
 def _add_loss_summaries(total_loss):
@@ -41,7 +42,7 @@ def _variable_on_device(name, shape, initializer, trainable=True):
   """
   # TODO(bichen): fix the hard-coded data type below
   dtype = tf.float32
-  if not callable(initializer):
+  if not isinstance(initializer, collections.Callable):
     var = tf.get_variable(name, initializer=initializer, trainable=trainable)
   else:
     var = tf.get_variable(

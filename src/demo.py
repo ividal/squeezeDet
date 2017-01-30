@@ -7,9 +7,9 @@ boxes around them. In video detection mode, perform real-time detection on the
 video stream.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import cv2
 import time
