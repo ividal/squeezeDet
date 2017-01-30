@@ -1,3 +1,9 @@
+## Note on Fork
+This is simply a port to Python 3 of Bichen Wu's original Python 2 code, for convenience.
+
+All the original installation instructions remain valid, provided pip and python point to pip3 and python3 respectively.
+
+
 ## _SqueezeDet:_ Unified, Small, Low Power Fully Convolutional Neural Networks for Real-Time Object Detection for Autonomous Driving
 By Bichen Wu, Forrest Iandola, Peter H. Jin, Kurt Keutzer (UC Berkeley & DeepScale)
 
@@ -9,13 +15,13 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
         Journal = {arXiv:1612.01051},
         Year = {2016}
     }
-    
+
 ## Installation:
 - Prerequisites:
     - Follow instructions to install Tensorflow: https://www.tensorflow.org.
     - Install opencv: http://opencv.org
     - Other packages that you might also need: easydict, joblib. You can use pip to install these packages:
-    
+
     ```Shell
     pip install easydict
     pip install joblib
@@ -25,7 +31,7 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
   ```Shell
   git clone https://github.com/BichenWuUCB/squeezeDet.git
   ```
-  Let's call the top level directory of SqueezeDet as `$SQDT_ROOT`. 
+  Let's call the top level directory of SqueezeDet as `$SQDT_ROOT`.
 
 ## Demo:
 - Download SqueezeDet model parameters from [here](https://www.dropbox.com/s/a6t3er8f03gdl4z/model_checkpoints.tgz?dl=0), untar it, and put it under `$SQDT_ROOT/data/` If you are using command line, type:
@@ -51,9 +57,9 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
 - SqueezeDet is a real-time object detector, which can be used to detect videos. The video demo will be released later.
 
 ## Training/Validation:
-- Download KITTI object detection dataset: [images](http://www.cvlibs.net/download.php?file=data_object_image_2.zip) and [labels](http://www.cvlibs.net/download.php?file=data_object_label_2.zip). Put them under `$SQDT_ROOT/data/KITTI/`. Unzip them, then you will get two directories:  `$SQDT_ROOT/data/KITTI/training/` and `$SQDT_ROOT/data/KITTI/testing/`. 
+- Download KITTI object detection dataset: [images](http://www.cvlibs.net/download.php?file=data_object_image_2.zip) and [labels](http://www.cvlibs.net/download.php?file=data_object_label_2.zip). Put them under `$SQDT_ROOT/data/KITTI/`. Unzip them, then you will get two directories:  `$SQDT_ROOT/data/KITTI/training/` and `$SQDT_ROOT/data/KITTI/testing/`.
 
-- Now we need to split the training data into a training set and a vlidation set. 
+- Now we need to split the training data into a training set and a validation set.
 
   ```Shell
   cd $SQDT_ROOT/data/KITTI/
@@ -62,13 +68,13 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
   ls ../training/image_2/ | grep ".png" | sed s/.png// > trainval.txt
   ```
   `trainval.txt` contains indices to all the images in the training data. In our experiments, we randomly split half of indices in `trainval.txt` into `train.txt` to form a training set and rest of them into `val.txt` to form a validation set. For your convenience, we provide a script to split the train-val set automatically. Simply run
-  
+
     ```Shell
   cd $SQDT_ROOT/data/
   python random_split_train_val.py
   ```
-  
-  then you should get the `train.txt` and `val.txt` under `$SQDT_ROOT/data/KITTI/ImageSets`. 
+
+  then you should get the `train.txt` and `val.txt` under `$SQDT_ROOT/data/KITTI/ImageSets`.
 
   When above two steps are finished, the structure of `$SQDT_ROOT/data/KITTI/` should at least contain:
 
@@ -91,7 +97,7 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
   # SqueezeNet
   wget https://www.dropbox.com/s/fzvtkc42hu3xw47/SqueezeNet.tgz
   tar -xzvf SqueezeNet.tgz
-  # ResNet50 
+  # ResNet50
   wget https://www.dropbox.com/s/p65lktictdq011t/ResNet.tgz
   tar -xzvf ResNet.tgz
   # VGG16
@@ -106,9 +112,9 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
   ./scripts/train.sh
   ```
 
-  Training logs are saved to the directory specified by `--train_dir`. 
+  Training logs are saved to the directory specified by `--train_dir`.
 
-- At the same time, you can launch evaluation by 
+- At the same time, you can launch evaluation by
 
   ```Shell
   cd $SQDT_ROOT/
@@ -116,9 +122,9 @@ This repository contains a tensorflow implementation of SqueezeDet, a convolutio
   ./scripts/eval_val.sh
   ```
 
-  If you've changed the `--train_dir` in the training script, make sure to also change `--checkpoint_dir` in the evaluation script to the same as `--train_dir` so evaluation script knows where to find the checkpoint. The evaluation logs will be dumped into the directory specified by `--eval_dir`. It's recommended to put `--train_dir` and  `--eval_dir` under the same `$LOG_DIR` such that tensorboard can load both training and evaluation logs. 
+  If you've changed the `--train_dir` in the training script, make sure to also change `--checkpoint_dir` in the evaluation script to the same as `--train_dir` so evaluation script knows where to find the checkpoint. The evaluation logs will be dumped into the directory specified by `--eval_dir`. It's recommended to put `--train_dir` and  `--eval_dir` under the same `$LOG_DIR` such that tensorboard can load both training and evaluation logs.
 
-  The two scripts simultaneously evaluate the model on training and validation set. The training script keeps dumping checkpoint (model parameters) to the training directory once every 1000 steps (step size can be changed). Once a new checkpoint is saved, evaluation threads load the new checkpoint file and evaluate them on training and validation set. 
+  The two scripts simultaneously evaluate the model on training and validation set. The training script keeps dumping checkpoint (model parameters) to the training directory once every 1000 steps (step size can be changed). Once a new checkpoint is saved, evaluation threads load the new checkpoint file and evaluate them on training and validation set.
 
 - Finally, to monitor training and evaluation process, you can use tensorboard by
 
